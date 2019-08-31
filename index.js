@@ -22,6 +22,54 @@ const utils = {
   },
   isNull: function (input) {
     return input === undefined || input === null;
+  },
+  uuid() {
+    const s4 = ()=>{
+      return Math.floor(( 1 + Math.random()) * 0x10000).toString(16).substring(1);
+    };
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+  },
+  getURLParam( name, search ) {
+    return decodeURIComponent( ( new RegExp( `[?|&]${name}=` + '([^&;]+?)(&|#|;|$)' ).exec( search || location.search ) || [ true, '' ] )[ 1 ].replace( /\+/g, '%20' ) ) || null;
+  },
+  toArray(object, keyName, arg3) {
+    let titleName = '';
+    if (!this.isObject(object)) {
+      return [];
+    }
+    if (this.isString(arg3)) {
+      titleName = arg3;
+    }
+    let list = [];
+    for (let i in object) {
+      let value = object[i];
+      let n = {};
+      if (this.isObject(value)) {
+        n = value;
+      } else {
+        n[titleName] = value;
+      }
+      if (keyName) n[keyName] = i;
+      list.push(n);
+    }
+    return list;
+  },
+  copy(o) {
+    if (o instanceof Array) {
+      var n = [];
+      for (var i = 0; i < o.length; ++i) {
+          n[i] = this.copy(o[i]);
+      }
+      return n;
+    } else if (o instanceof Object) {
+        var n = {}
+        for (var i in o) {
+            n[i] = this.copy(o[i]);
+        }
+        return n;
+    } else {
+        return o;
+    }
   }
 }
 export default utils;
