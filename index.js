@@ -81,8 +81,20 @@ const utils = {
     }
     return false;
   },
-  getLocal(key) {
-    window.localStorage.getItem(key)
+  getLocal(key, type) {
+    if(window.localStorage && JSON && key) {
+      let data = window.localStorage.getItem(key);
+      if(type && type == 'json' && !this.isNull(data)) {
+        try{
+          return JSON.parse(data)
+        } catch(e) {
+          console.error('parse error')
+        }
+      } else {
+        return data;
+      }
+    }
+    
   }
 }
 export default utils;
