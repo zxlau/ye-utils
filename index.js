@@ -70,6 +70,19 @@ const utils = {
     } else {
         return o;
     }
+  },
+  saveLocal(key, value) {
+    if(window.localStorage && JSON && key) {
+      if(typeof value == 'object') {
+        value = JSON.stringify(value);
+      }
+      window.localStorage.setItem(key, value);
+      return true;
+    }
+    return false;
+  },
+  getLocal(key) {
+    window.localStorage.getItem(key)
   }
 }
 export default utils;
