@@ -94,7 +94,12 @@ const utils = {
         return data;
       }
     }
-    
-  }
+  },
+  removeLocal(key) {
+    if (window.localStorage && JSON && key) {
+      window.localStorage.removeItem(key);
+    }
+    return null;
+  },
 }
 export default utils;
