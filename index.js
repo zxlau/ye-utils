@@ -56,14 +56,14 @@ const utils = {
   },
   copy(o) {
     if (o instanceof Array) {
-      var n = [];
-      for (var i = 0; i < o.length; ++i) {
+      let n = [];
+      for (let i = 0; i < o.length; ++i) {
           n[i] = this.copy(o[i]);
       }
       return n;
     } else if (o instanceof Object) {
-        var n = {}
-        for (var i in o) {
+        let n = {}
+        for (let i in o) {
             n[i] = this.copy(o[i]);
         }
         return n;
