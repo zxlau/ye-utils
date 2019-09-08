@@ -101,5 +101,12 @@ const utils = {
     }
     return null;
   },
+  setCookie(key, value, domain, path, minSec) {
+    const cookieEnabled = (navigator.cookieEnabled) ? true : false;
+    if(key && cookieEnabled) {
+
+    }
+    return false;
+  }
 }
 export default utils;
