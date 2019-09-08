@@ -101,10 +101,12 @@ const utils = {
     }
     return null;
   },
-  setCookie(key, value, domain, path, minSec) {
+  setCookie(key, value, domain, path = '/', minSec) {
     const cookieEnabled = (navigator.cookieEnabled) ? true : false;
     if(key && cookieEnabled) {
-
+      if(typeof value === 'object') {
+        value = JSON.stringify(value);
+      }
     }
     return false;
   }
