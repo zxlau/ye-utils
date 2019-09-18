@@ -107,6 +107,19 @@ const utils = {
       if(typeof value === 'object') {
         value = JSON.stringify(value);
       }
+      let expires;
+      if(minSec) {
+        expires = new Date();
+        expires.setTime(expires.getTime() + minSec * 1000);
+      } else {
+        expires = new Date('9999-01-01');
+      }
+      let cookieStr = `${key}=${escape(value)}${minSec?(`;expires=${exp.toGMTString()}`) : ''};path=${path};`; 
+      if(domain) {
+        cookieStr += `domain=${domain}`;
+      }
+      document.cookie = cookieStr;
+      return true;
     }
     return false;
   }
